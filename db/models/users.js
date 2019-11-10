@@ -46,7 +46,7 @@ const Doctor = bookshelf.model('Doctor', {
 const Appointment = bookshelf.model('Appointment', {
     tableName: 'appointment',
     patient() {
-        return this.belongsTo('Patient')
+        return this.belongsTo('Patient') // can use has many wtf?
     },
     doctor() {
         return this.belongsTo('Doctor')
