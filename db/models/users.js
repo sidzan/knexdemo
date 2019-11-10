@@ -33,4 +33,35 @@ const Users = bookshelf.model('Users', {
     hidden: ['created_at', 'updated_at']
 })
 
-module.exports = { Users, Todos };
+const Doctor = bookshelf.model('Doctor', {
+    tableName: 'doctor',
+    user() {
+        return this.belongsTo('Users')
+    },
+    patients() {
+        return this.belongsToMany('Patient').through('Appointment')
+    }
+})
+
+const Appointment = bookshelf.model('Appointment', {
+    tableName: 'appointment',
+    patient() {
+        return this.belongsTo('Patient')
+    },
+    doctor() {
+        return this.belongsTo('Doctor')
+
+    }
+})
+
+const Patient = bookshelf.model('Patient', {
+    tableName: 'patient',
+    user() {
+        return this.belongsTo('Users')
+    },
+    doctors() {
+        return this.belongsToMany('Doctor').through('Appointment')
+    }
+})
+
+module.exports = { Users, Todos, Doctor, Appointment, Patient };

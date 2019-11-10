@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const port = process.env.port || 8000;
 const app = express();
 const knex = require('./db/knex');
-const { Users, Todos } = require("./db/models/users");
+const { Users, Todos, Appointment, Patient, Doctor } = require("./db/models/users");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -100,6 +100,38 @@ app.get('/bookshelf_todos/:id', async (req, res) => {
     res.json(response);
 });
 
+
+app.get('/patients', async (req, res) => {
+    console.log("get all patients");
+    const patient = await Patient
+        .forge()
+        .fetchAll({ withRelated: ['user', 'doctors.user'] })
+    res.json(patient);
+})
+
+app.get('/patient/:patientId', async (req, res) => {
+    console.log("get all doctors for one patien");
+    const patient = await Patient
+        .forge()
+        .where({ id: req.params.patientId })
+        .fetchAll({ withRelated: ['user', 'doctors'] })
+    res.json(patient);
+})
+
+app.get('/doctors', async (req, res) => {
+    console.log("get all doctors for patient");
+    const patient = await Doctor.forge().fetchAll({ withRelated: ['doctors'] })
+    res.json(patient);
+})
+
+app.get('/doctor/:doctor', async (req, res) => {
+    console.log("get all doctors for one patien");
+    const patient = await Doctor
+        .forge()
+        .where({ id: req.params.patientId })
+        .fetchAll({ withRelated: ['user'] })
+    res.json(patient);
+})
 
 app.listen(port, () => {
     console.log(`Listening to Port ${port}`)

@@ -1,5 +1,6 @@
 module.exports = {
     development: {
+        debug: true,
         client: 'pg',
         connection: 'postgres://postgres:password@localhost/todos',
         migrations: {
