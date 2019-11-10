@@ -5,28 +5,28 @@ exports.seed = function(knex, Promise) {
       // Inserts seed entries
       return knex('todos').insert([
         {
-          title: 'go to store for milk',
+          title: 'SIJAN, go to store for milk',
           user_id: 1,
         },
         {
-          title: 'walk the dog',
+          title: 'ALissa, walk the dog',
           user_id: 2,
         },
         {
-          title: 'go to the gym',
-          user_id: 3,
+          title: 'ALissa, go to the gym',
+          user_id: 2,
         },
         {
-          title: 'stop the damn leafblowers outside',
-          user_id: 3,
+          title: 'ALissa, stop the damn leafblowers outside',
+          user_id: 2,
         },
         {
-          title: 'get the mail',
-          user_id: 3,
+          title: 'ALissa, get the mail',
+          user_id: 2,
         },
         {
-          title: 'get some headphones',
-          user_id: 3,
+          title: 'SIjan get some headphones',
+          user_id: 1,
         },
       ]);
     });
